@@ -48,16 +48,17 @@ export default function SessionsPage() {
   ];
 
   return (
-    <div>
+    <div className="animate-slide-up">
       <Breadcrumb items={breadcrumbItems} />
 
       <div className="mb-8">
-        <h1 className="text-2xl font-bold text-gray-900 capitalize">
-          Chapter: {chapterId}
+        <h1 className="text-2xl font-bold text-foreground capitalize tracking-tight">
+          {chapterId}
         </h1>
+        <p className="mt-1 text-muted-foreground">{mockSessions.length} sessions recorded</p>
       </div>
 
-      <div className="space-y-4">
+      <div className="space-y-3">
         {mockSessions.map((session) => (
           <SessionCard key={session.id} session={session} />
         ))}

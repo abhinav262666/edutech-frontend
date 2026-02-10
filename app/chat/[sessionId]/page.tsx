@@ -107,12 +107,15 @@ Formula: velocity = displacement / time`);
   };
 
   return (
-    <div className="flex h-screen flex-col">
+    <div className="flex h-screen flex-col bg-background">
       {/* Header */}
-      <div className="border-b bg-white px-6 py-4">
+      <div className="border-b border-border/50 bg-background/80 backdrop-blur-xl px-6 py-3">
         <div className="flex items-center justify-between">
-          <h1 className="text-lg font-semibold">Motion - Session Jan 28</h1>
-          <Button variant="ghost" size="icon" onClick={handleClose}>
+          <div className="flex items-center gap-3">
+            <div className="h-2 w-2 rounded-full bg-primary animate-pulse-glow" />
+            <h1 className="text-base font-semibold text-foreground">Motion - Session Jan 28</h1>
+          </div>
+          <Button variant="ghost" size="icon" onClick={handleClose} className="text-muted-foreground hover:text-foreground hover:bg-secondary">
             <X className="h-5 w-5" />
           </Button>
         </div>
@@ -121,8 +124,8 @@ Formula: velocity = displacement / time`);
       {/* Split view */}
       <div className="flex flex-1 overflow-hidden">
         {/* Chat Area */}
-        <div className="flex w-1/2 flex-col border-r">
-          <div className="flex-1 overflow-auto bg-gray-50 p-6">
+        <div className="flex w-1/2 flex-col border-r border-border/50">
+          <div className="flex-1 overflow-auto bg-background p-6">
             {messages.map((message, index) => (
               <ChatMessage
                 key={index}
@@ -133,18 +136,18 @@ Formula: velocity = displacement / time`);
             ))}
             {isLoading && (
               <div className="flex justify-start">
-                <div className="rounded-lg bg-muted px-4 py-3">
-                  <div className="flex gap-1">
-                    <div className="h-2 w-2 animate-bounce rounded-full bg-gray-400" style={{ animationDelay: '0ms' }} />
-                    <div className="h-2 w-2 animate-bounce rounded-full bg-gray-400" style={{ animationDelay: '150ms' }} />
-                    <div className="h-2 w-2 animate-bounce rounded-full bg-gray-400" style={{ animationDelay: '300ms' }} />
+                <div className="rounded-xl bg-secondary/50 border border-border/50 px-4 py-3">
+                  <div className="flex gap-1.5">
+                    <div className="h-2 w-2 animate-bounce rounded-full bg-primary/60" style={{ animationDelay: '0ms' }} />
+                    <div className="h-2 w-2 animate-bounce rounded-full bg-primary/60" style={{ animationDelay: '150ms' }} />
+                    <div className="h-2 w-2 animate-bounce rounded-full bg-primary/60" style={{ animationDelay: '300ms' }} />
                   </div>
                 </div>
               </div>
             )}
             <div ref={messagesEndRef} />
           </div>
-          <div className="border-t bg-white p-4">
+          <div className="border-t border-border/50 bg-card/50 backdrop-blur-sm p-4">
             <ChatInput onSend={handleSendMessage} disabled={isLoading} />
           </div>
         </div>
@@ -156,21 +159,21 @@ Formula: velocity = displacement / time`);
       </div>
 
       {/* Bottom Actions */}
-      <div className="border-t bg-white px-6 py-3">
+      <div className="border-t border-border/50 bg-card/50 backdrop-blur-sm px-6 py-3">
         <div className="flex gap-2">
-          <Button variant="outline" size="sm">
+          <Button variant="outline" size="sm" className="border-border/50 text-muted-foreground hover:text-foreground hover:border-primary/30 hover:bg-primary/5">
             <FileText className="mr-2 h-4 w-4" />
             View Notes
           </Button>
-          <Button variant="outline" size="sm">
+          <Button variant="outline" size="sm" className="border-border/50 text-muted-foreground hover:text-foreground hover:border-primary/30 hover:bg-primary/5">
             <Edit className="mr-2 h-4 w-4" />
             Edit Notes
           </Button>
-          <Button variant="outline" size="sm">
+          <Button variant="outline" size="sm" className="border-border/50 text-muted-foreground hover:text-foreground hover:border-primary/30 hover:bg-primary/5">
             <FileText className="mr-2 h-4 w-4" />
             Generate Notes
           </Button>
-          <Button variant="outline" size="sm">
+          <Button variant="outline" size="sm" className="border-border/50 text-muted-foreground hover:text-foreground hover:border-primary/30 hover:bg-primary/5">
             <Download className="mr-2 h-4 w-4" />
             Export PDF
           </Button>

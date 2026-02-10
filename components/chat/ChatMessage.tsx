@@ -16,8 +16,13 @@ export function ChatMessage({ message, onPillClick, onCitationClick }: ChatMessa
 
   return (
     <div className={cn('mb-4 flex', isUser ? 'justify-end' : 'justify-start')}>
-      <div className={cn('max-w-[80%] rounded-lg px-4 py-3', isUser ? 'bg-primary text-primary-foreground' : 'bg-muted')}>
-        <div className="whitespace-pre-wrap break-words">
+      <div className={cn(
+        'max-w-[80%] rounded-2xl px-4 py-3',
+        isUser
+          ? 'bg-primary text-primary-foreground rounded-br-md'
+          : 'bg-secondary/50 border border-border/50 text-foreground rounded-bl-md'
+      )}>
+        <div className="whitespace-pre-wrap break-words text-sm leading-relaxed">
           {message.content}
           {message.citations && message.citations.length > 0 && (
             <span className="ml-1">

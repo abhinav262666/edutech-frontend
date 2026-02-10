@@ -15,21 +15,21 @@ export function NoteViewer({ note }: NoteViewerProps) {
       // Headers
       if (line.startsWith('# ')) {
         return (
-          <h1 key={index} className="text-3xl font-bold mt-6 mb-4">
+          <h1 key={index} className="text-2xl font-bold mt-8 mb-4 text-foreground tracking-tight">
             {line.replace('# ', '')}
           </h1>
         );
       }
       if (line.startsWith('## ')) {
         return (
-          <h2 key={index} className="text-2xl font-bold mt-5 mb-3">
+          <h2 key={index} className="text-xl font-bold mt-6 mb-3 text-foreground">
             {line.replace('## ', '')}
           </h2>
         );
       }
       if (line.startsWith('### ')) {
         return (
-          <h3 key={index} className="text-xl font-semibold mt-4 mb-2">
+          <h3 key={index} className="text-lg font-semibold mt-5 mb-2 text-foreground">
             {line.replace('### ', '')}
           </h3>
         );
@@ -38,7 +38,7 @@ export function NoteViewer({ note }: NoteViewerProps) {
       // Lists
       if (line.startsWith('- ')) {
         return (
-          <li key={index} className="ml-4 list-disc">
+          <li key={index} className="ml-4 list-disc text-muted-foreground leading-relaxed">
             {line.replace('- ', '')}
           </li>
         );
@@ -49,11 +49,11 @@ export function NoteViewer({ note }: NoteViewerProps) {
       if (citationRegex.test(line)) {
         const parts = line.split(citationRegex);
         return (
-          <p key={index} className="mb-2">
+          <p key={index} className="mb-2 text-muted-foreground leading-relaxed">
             {parts.map((part, i) => {
               if (i % 2 === 1) {
                 return (
-                  <Badge key={i} variant="secondary" className="mx-1 text-xs">
+                  <Badge key={i} variant="secondary" className="mx-1 text-xs bg-accent/15 text-accent border border-accent/20 font-mono">
                     [{part}]
                   </Badge>
                 );
@@ -67,7 +67,7 @@ export function NoteViewer({ note }: NoteViewerProps) {
       // Regular paragraph
       if (line.trim()) {
         return (
-          <p key={index} className="mb-2">
+          <p key={index} className="mb-2 text-muted-foreground leading-relaxed">
             {line}
           </p>
         );
@@ -78,7 +78,7 @@ export function NoteViewer({ note }: NoteViewerProps) {
   };
 
   return (
-    <div className="prose prose-sm max-w-none">
+    <div className="max-w-none">
       {renderContent(note.content)}
     </div>
   );
