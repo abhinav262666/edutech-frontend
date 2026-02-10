@@ -12,7 +12,7 @@ export function PillButton({ text, onClick }: PillButtonProps) {
     <Button
       variant="outline"
       size="sm"
-      className="rounded-full text-xs"
+      className="rounded-full text-xs border-primary/30 text-primary bg-primary/5 hover:bg-primary/10 hover:text-primary hover:border-primary/50 transition-all"
       onClick={onClick}
     >
       {text}

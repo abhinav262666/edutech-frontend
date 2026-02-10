@@ -64,18 +64,19 @@ export default function ChaptersPage() {
   ];
 
   return (
-    <div>
+    <div className="animate-slide-up">
       <Breadcrumb items={breadcrumbItems} />
 
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900 capitalize">
-          {subjectId} - Class 10
+        <h1 className="text-3xl font-bold text-foreground capitalize tracking-tight">
+          {subjectId}
         </h1>
+        <p className="mt-1 text-muted-foreground">Class 10 -- {chapters.length} chapters available</p>
       </div>
 
-      <div className="space-y-4">
-        {chapters.map((chapter) => (
-          <ChapterCard key={chapter.id} chapter={chapter} subjectId={subjectId} />
+      <div className="space-y-3">
+        {chapters.map((chapter, index) => (
+          <ChapterCard key={chapter.id} chapter={chapter} subjectId={subjectId} index={index} />
         ))}
       </div>
     </div>

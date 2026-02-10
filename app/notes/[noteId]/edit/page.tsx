@@ -67,22 +67,25 @@ export default function NoteEditPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-background">
       {/* Header */}
-      <div className="border-b bg-white">
-        <div className="container mx-auto px-4 py-4">
+      <div className="sticky top-0 z-50 border-b border-border/50 bg-background/80 backdrop-blur-xl">
+        <div className="container mx-auto px-4 py-3 lg:px-8">
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-4">
-              <Button variant="ghost" size="icon" onClick={() => router.back()}>
+            <div className="flex items-center gap-3">
+              <Button variant="ghost" size="icon" onClick={() => router.back()} className="text-muted-foreground hover:text-foreground hover:bg-secondary">
                 <ArrowLeft className="h-5 w-5" />
               </Button>
-              <h1 className="text-xl font-semibold">Editing Notes</h1>
+              <h1 className="text-base font-semibold text-foreground">Editing Notes</h1>
             </div>
             <div className="flex items-center gap-2">
               {isSaving ? (
-                <span className="text-sm text-muted-foreground">Saving...</span>
+                <span className="flex items-center gap-1.5 text-sm text-muted-foreground">
+                  <div className="h-3 w-3 animate-spin rounded-full border-2 border-primary border-t-transparent" />
+                  Saving...
+                </span>
               ) : lastSaved ? (
-                <span className="flex items-center gap-1 text-sm text-green-600">
+                <span className="flex items-center gap-1 text-sm text-primary">
                   <Check className="h-4 w-4" />
                   Saved
                 </span>
@@ -93,7 +96,7 @@ export default function NoteEditPage() {
       </div>
 
       {/* Editor */}
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto px-4 py-8 lg:px-8">
         <div className="mx-auto max-w-4xl">
           <NoteEditor content={content} onChange={handleContentChange} />
         </div>

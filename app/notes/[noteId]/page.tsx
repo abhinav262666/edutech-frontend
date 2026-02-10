@@ -55,36 +55,36 @@ export default function NotePage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-background">
       {/* Header */}
-      <div className="border-b bg-white">
-        <div className="container mx-auto px-4 py-4">
+      <div className="sticky top-0 z-50 border-b border-border/50 bg-background/80 backdrop-blur-xl">
+        <div className="container mx-auto px-4 py-3 lg:px-8">
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-4">
-              <Button variant="ghost" size="icon" onClick={() => router.back()}>
+            <div className="flex items-center gap-3">
+              <Button variant="ghost" size="icon" onClick={() => router.back()} className="text-muted-foreground hover:text-foreground hover:bg-secondary">
                 <ArrowLeft className="h-5 w-5" />
               </Button>
               <div>
-                <h1 className="text-xl font-semibold">
+                <h1 className="text-base font-semibold text-foreground">
                   Notes for Motion - Session Jan 28
                 </h1>
-                <p className="text-sm text-muted-foreground">
-                  Last updated: {new Date(mockNote.updatedAt).toLocaleString()}
+                <p className="text-xs text-muted-foreground font-mono">
+                  Updated {new Date(mockNote.updatedAt).toLocaleString()}
                 </p>
               </div>
             </div>
             <div className="flex gap-2">
-              <Button variant="outline" size="sm" onClick={handleEdit}>
+              <Button variant="outline" size="sm" onClick={handleEdit} className="border-border/50 text-muted-foreground hover:text-foreground hover:border-primary/30 hover:bg-primary/5">
                 <Edit className="mr-2 h-4 w-4" />
                 Edit
               </Button>
-              <Button variant="outline" size="sm" onClick={handleExportPDF}>
+              <Button variant="outline" size="sm" onClick={handleExportPDF} className="border-border/50 text-muted-foreground hover:text-foreground hover:border-primary/30 hover:bg-primary/5">
                 <Download className="mr-2 h-4 w-4" />
                 Export PDF
               </Button>
-              <Button variant="outline" size="sm" onClick={handleExportMarkdown}>
+              <Button variant="outline" size="sm" onClick={handleExportMarkdown} className="border-border/50 text-muted-foreground hover:text-foreground hover:border-primary/30 hover:bg-primary/5">
                 <FileDown className="mr-2 h-4 w-4" />
-                Export Markdown
+                Export MD
               </Button>
             </div>
           </div>
@@ -92,8 +92,8 @@ export default function NotePage() {
       </div>
 
       {/* Content */}
-      <div className="container mx-auto px-4 py-8">
-        <div className="mx-auto max-w-4xl rounded-lg bg-white p-8 shadow-sm">
+      <div className="container mx-auto px-4 py-8 lg:px-8">
+        <div className="mx-auto max-w-4xl rounded-xl border border-border/50 bg-card/80 p-8">
           <NoteViewer note={mockNote} />
         </div>
       </div>

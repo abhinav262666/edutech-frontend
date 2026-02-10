@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Zap, ArrowRight } from 'lucide-react';
 
 export default function LoginPage() {
   const [schoolId, setSchoolId] = useState('');
@@ -52,80 +53,120 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gray-50 px-4">
-      <Card className="w-full max-w-md">
-        <CardHeader className="space-y-1 text-center">
-          <div className="mb-4 flex justify-center">
-            <div className="h-12 w-12 rounded-full bg-primary flex items-center justify-center">
-              <span className="text-2xl font-bold text-white">E</span>
-            </div>
+    <div className="relative flex min-h-screen items-center justify-center bg-background px-4 overflow-hidden">
+      {/* Background grid pattern */}
+      <div
+        className="absolute inset-0 opacity-[0.03]"
+        style={{
+          backgroundImage: `linear-gradient(hsl(var(--primary)) 1px, transparent 1px), linear-gradient(90deg, hsl(var(--primary)) 1px, transparent 1px)`,
+          backgroundSize: '60px 60px',
+        }}
+      />
+      {/* Top-left glow */}
+      <div className="absolute -top-40 -left-40 h-96 w-96 rounded-full bg-primary/10 blur-3xl" />
+      {/* Bottom-right glow */}
+      <div className="absolute -bottom-40 -right-40 h-96 w-96 rounded-full bg-accent/10 blur-3xl" />
+
+      <div className="relative z-10 w-full max-w-md animate-slide-up">
+        {/* Brand header */}
+        <div className="mb-8 text-center">
+          <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-1.5">
+            <Zap className="h-4 w-4 text-primary" />
+            <span className="text-sm font-medium text-primary">AI-Powered Learning</span>
           </div>
-          <CardTitle className="text-2xl">EduTech Platform</CardTitle>
-          <CardDescription>
-            Enter your school ID and password to access your dashboard
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div className="space-y-2">
-              <Label htmlFor="schoolId">School ID</Label>
-              <Input
-                id="schoolId"
-                type="text"
-                placeholder="Enter your school ID"
-                value={schoolId}
-                onChange={(e) => setSchoolId(e.target.value)}
-                required
-                disabled={isLoading}
-              />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="password">Password</Label>
-              <Input
-                id="password"
-                type="password"
-                placeholder="Enter your password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-                disabled={isLoading}
-              />
-            </div>
-            <div className="flex items-center space-x-2">
-              <input
-                id="remember"
-                type="checkbox"
-                checked={rememberMe}
-                onChange={(e) => setRememberMe(e.target.checked)}
-                disabled={isLoading}
-                className="h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary"
-              />
-              <label
-                htmlFor="remember"
-                className="text-sm text-gray-600"
-              >
-                Remember me
-              </label>
-            </div>
-            {error && (
-              <div className="rounded-md bg-red-50 p-3 text-sm text-red-600">
-                {error}
+          <h1 className="text-4xl font-bold tracking-tight text-gradient">EduTech</h1>
+          <p className="mt-2 text-muted-foreground">Your personal AI study buddy</p>
+        </div>
+
+        <Card className="glow-primary border-border/50 bg-card/80 backdrop-blur-xl">
+          <CardHeader className="space-y-1 text-center pb-4">
+            <CardTitle className="text-xl text-foreground">Welcome back</CardTitle>
+            <CardDescription className="text-muted-foreground">
+              Enter your credentials to continue learning
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <form onSubmit={handleSubmit} className="space-y-5">
+              <div className="space-y-2">
+                <Label htmlFor="schoolId" className="text-sm font-medium text-foreground">School ID</Label>
+                <Input
+                  id="schoolId"
+                  type="text"
+                  placeholder="Enter your school ID"
+                  value={schoolId}
+                  onChange={(e) => setSchoolId(e.target.value)}
+                  required
+                  disabled={isLoading}
+                  className="h-11 bg-secondary/50 border-border/50 text-foreground placeholder:text-muted-foreground focus:border-primary focus:ring-primary/20"
+                />
               </div>
-            )}
-            <Button type="submit" className="w-full" disabled={isLoading}>
-              {isLoading ? 'Logging in...' : 'Login'}
-            </Button>
-            <div className="text-center">
-              <a
-                href="#"
-                className="text-sm text-primary hover:underline"
+              <div className="space-y-2">
+                <Label htmlFor="password" className="text-sm font-medium text-foreground">Password</Label>
+                <Input
+                  id="password"
+                  type="password"
+                  placeholder="Enter your password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                  disabled={isLoading}
+                  className="h-11 bg-secondary/50 border-border/50 text-foreground placeholder:text-muted-foreground focus:border-primary focus:ring-primary/20"
+                />
+              </div>
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <input
+                    id="remember"
+                    type="checkbox"
+                    checked={rememberMe}
+                    onChange={(e) => setRememberMe(e.target.checked)}
+                    disabled={isLoading}
+                    className="h-4 w-4 rounded border-border bg-secondary accent-primary"
+                  />
+                  <label
+                    htmlFor="remember"
+                    className="text-sm text-muted-foreground"
+                  >
+                    Remember me
+                  </label>
+                </div>
+                <a
+                  href="#"
+                  className="text-sm text-primary hover:text-primary/80 transition-colors"
+                >
+                  Forgot password?
+                </a>
+              </div>
+              {error && (
+                <div className="rounded-lg border border-destructive/30 bg-destructive/10 p-3 text-sm text-destructive">
+                  {error}
+                </div>
+              )}
+              <Button
+                type="submit"
+                className="w-full h-11 bg-primary text-primary-foreground font-semibold hover:bg-primary/90 glow-primary transition-all duration-200"
+                disabled={isLoading}
               >
-                Forgot password?
-              </a>
-            </div>
-          </form>
-        </CardContent>
-      </Card>
+                {isLoading ? (
+                  <div className="flex items-center gap-2">
+                    <div className="h-4 w-4 animate-spin rounded-full border-2 border-primary-foreground border-t-transparent" />
+                    <span>Logging in...</span>
+                  </div>
+                ) : (
+                  <span className="flex items-center gap-2">
+                    Let{"'"}s Go
+                    <ArrowRight className="h-4 w-4" />
+                  </span>
+                )}
+              </Button>
+            </form>
+          </CardContent>
+        </Card>
+
+        <p className="mt-6 text-center text-xs text-muted-foreground">
+          Built for students of Class 9-12 across India
+        </p>
+      </div>
     </div>
   );
 }
