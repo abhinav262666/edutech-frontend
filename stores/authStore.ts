@@ -4,6 +4,7 @@ import { Student } from '@/types';
 interface AuthState {
   student: Student | null;
   isAuthenticated: boolean;
+  isHydrated: boolean;
   token: string | null;
   setAuth: (student: Student, token: string) => void;
   clearAuth: () => void;
@@ -13,6 +14,7 @@ interface AuthState {
 export const useAuthStore = create<AuthState>((set) => ({
   student: null,
   isAuthenticated: false,
+  isHydrated: false,
   token: null,
 
   setAuth: (student, token) => {
@@ -39,11 +41,13 @@ export const useAuthStore = create<AuthState>((set) => ({
       if (token && studentData) {
         try {
           const student = JSON.parse(studentData);
-          set({ student, token, isAuthenticated: true });
+          set({ student, token, isAuthenticated: true, isHydrated: true });
+          return;
         } catch (error) {
           console.error('Failed to parse student data:', error);
         }
       }
+      set({ isHydrated: true });
     }
   },
 }));
