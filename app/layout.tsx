@@ -1,4 +1,4 @@
-import type { Metadata, Viewport } from "next";
+import type { Metadata } from "next";
 import { Outfit, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { Providers } from "./providers";
@@ -18,19 +18,13 @@ export const metadata: Metadata = {
   description: "AI-powered learning platform built for Indian students in class 9-12. Master Physics, Maths, Chemistry & more.",
 };
 
-export const viewport: Viewport = {
-  themeColor: "#0a0a0f",
-  width: "device-width",
-  initialScale: 1,
-};
-
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${outfit.variable} ${jetbrainsMono.variable}`}>
+    <html lang="en" suppressHydrationWarning className={`${outfit.variable} ${jetbrainsMono.variable}`}>
       <body className="font-sans">
         <Providers>{children}</Providers>
       </body>
