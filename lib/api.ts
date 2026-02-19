@@ -44,7 +44,19 @@ export default api;
 export const authAPI = {
   login: async (schoolId: string, password: string) => {
     const response = await api.post('/auth/login', { school_id: schoolId, password });
-    return response.data;
+    // Backend returns: { success, message, data: { access_token, user } }
+    // Transform to frontend expected format
+    const { access_token, user } = response.data.data;
+    return {
+      token: access_token,
+      student: {
+        id: user.id,
+        school_id: user.school_id,
+        profile: { name: user.name },
+        organization_id: user.organization_id || '',
+        organization: { name: user.organization_name || 'Demo School' }
+      }
+    };
   },
   logout: async () => {
     const response = await api.post('/auth/logout');

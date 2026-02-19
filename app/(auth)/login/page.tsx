@@ -25,28 +25,34 @@ export default function LoginPage() {
     setError('');
     setIsLoading(true);
 
-    // Simulate API delay
-    await new Promise(resolve => setTimeout(resolve, 500));
-
     try {
-      // Mock authentication - accept any credentials
-      // TODO: Replace with real API call when backend is ready
-      // const data = await authAPI.login(schoolId, password);
+      // Call real backend authentication API
+      const data = await authAPI.login(schoolId, password);
 
-      const mockStudent = {
-        id: '1',
-        name: schoolId || 'Student',
-        schoolId: schoolId,
-        organizationId: 'org-1',
-        organizationName: 'Demo School',
+      // Transform backend response to frontend format
+      const student = {
+        id: data.student.id,
+        name: data.student.profile?.name || 'Student',
+        schoolId: data.student.school_id,
+        organizationId: data.student.organization_id,
+        organizationName: data.student.organization?.name || 'School',
       };
 
-      const mockToken = 'mock-jwt-token-' + Date.now();
+      const token = data.token;
 
-      setAuth(mockStudent, mockToken);
+      setAuth(student, token);
       router.push('/dashboard');
     } catch (err: any) {
-      setError(err.response?.data?.message || 'Invalid credentials. Please try again.');
+      // Handle different error scenarios
+      if (err.code === 'ERR_NETWORK' || err.message.includes('Network Error')) {
+        setError('Unable to connect to server. Please ensure the backend is running on port 8001.');
+      } else if (err.response?.status === 401) {
+        setError('Invalid credentials. Please try again.');
+      } else if (err.response?.status === 404) {
+        setError('Student not found. Please check your School ID.');
+      } else {
+        setError(err.response?.data?.message || err.response?.data?.detail || 'An error occurred. Please try again.');
+      }
     } finally {
       setIsLoading(false);
     }
